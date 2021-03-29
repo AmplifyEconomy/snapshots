@@ -1,27 +1,32 @@
 # Gateway Snapshots
 
-A way to parse snapshots and archive snapshots with AWS SDK compatible drivers.
+A way to parse snapshots and archive snapshots with AWS SDK compatible drivers. This tool will eventually migrate to archiving snapshots to Arweave in the future.
 
 ## Configuration
 
 Update the configuration file with the appropriate urls.
 
 ```config
-LEGACY_BLOCKS_URL=https://aws.amazon.com
-LEGACY_TRANSACTIONS_URL=https://aws.amazon.com
-LEGACY_TAGS_URL=https://aws.amazon.com
+LEGACY_BLOCKS_URL=
+LEGACY_TRANSACTIONS_URL=
+LEGACY_TAGS_URL=
 
-LTS_BLOCKS_URL=https://aws.amazon.com
-LTS_TRANSACTIONS_URL=https://aws.amazon.com
-LTS_TAGS_URL=https://aws.amazon.com
+LTS_BLOCKS_URL=
+LTS_TRANSACTIONS_URL=
+LTS_TAGS_URL=
 
-OUTPUT_FOLDER=/arweave/parsed
-OUTPUT_URL=https://aws.amazon.com
+LEGACY_TRANSACTIONS=/arweave/legacy/transaction.csv
+OUTPUT_TRANSACTIONS=/arweave/parsed/transaction.csv
 
-KEY=...
-SECRET=...
-ENDPOINT=...
-NAME=...
+ARCHIVE_PATH=
+ARCHIVE_URL=
+
+KEY=
+SECRET=
+ENDPOINT=
+NAME=
+
+INDICES=["App-Name", "app", "domain", "namespace"]
 ```
 
 Copy the config file to `.env`.
@@ -34,7 +39,7 @@ cp .env.default .env
 
 ### `yarn dev:build`
 
-Builds the Typescript.
+Compiles the typescript to `dist`.
 
 ### `yarn dev:legacy`
 

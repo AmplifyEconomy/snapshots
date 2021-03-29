@@ -7,15 +7,17 @@
   "license": "MIT",
   "scripts": {
     "dev:build": "tsc",
-    "dev:legacy": "npm run build && node dist/src/Legacy.js",
-    "dev:upload": "npm run build && node dist/src/Upload.js"
+    "dev:legacy": "npm run dev:build && node dist/Legacy.js",
+    "dev:upload": "npm run dev:build && node dist/Upload.js"
   },
   "dependencies": {
     "aws-sdk": "^2.872.0",
     "colors": "^1.4.0",
     "dotenv": "^8.2.0",
-    "event-stream": "^4.0.1",
+    "fast-csv": "^4.3.6",
+    "fs-jetpack": "^4.1.0",
     "progress": "^2.0.3",
+    "progress-stream": "^2.0.0",
     "superagent": "^6.1.0",
     "typescript": "^4.2.3"
   },
