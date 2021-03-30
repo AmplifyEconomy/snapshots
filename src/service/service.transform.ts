@@ -33,20 +33,27 @@ export async function TransformFile(input: string, output: string, order: Array<
             
             for (let i = 0; i < order.length; i++) {
                 const key = order[i];
-                if (key === `tags`) {
-                    coreValues.push(row[key].replace(/"/g, '\\"'));
+                if (row[key].indexOf(`<html>`) !== -1) {
+                    coreValues.push(`""`);
+                } else if (key === 'tags' && !row[key]) {
+                    coreValues.push(`"[]"`);
                 } else {
-                    coreValues.push(row[key]);
+                    coreValues.push(`"${row[key].replace(/"/g, '\\"')}"`);
                 }
             }
 
             for (let i = 0; i < INDICES.length; i++) {
                 const index = INDICES[i];
                 const value = tagValue(tags, index);
-                indexValues.push(value);
+
+                if (value.length > 1 && value.length < 64) {
+                    indexValues.push(`"${value}"`);
+                } else {
+                    indexValues.push(`""`);
+                }                
             }
 
-            const indexedLine = coreValues.join(`|`) + `|` + indexValues.join(`|`);
+            const indexedLine = coreValues.join(`|`) + `|` + indexValues.join(`|`) + `\n`;
             writer.write(indexedLine);
         })
         .on('error', error => {
