@@ -16,7 +16,10 @@ LTS_TRANSACTIONS_URL=
 LTS_TAGS_URL=
 
 LEGACY_TRANSACTIONS=/arweave/legacy/transaction.csv
-OUTPUT_TRANSACTIONS=/arweave/parsed/transaction.csv
+OUTPUT_TRANSACTIONS=/arweave/parsed
+
+LEGACY_TAGS=/arweave/legacy/tags.csv
+OUTPUT_TAGS=/arweave/parsed
 
 ARCHIVE_PATH=
 ARCHIVE_URL=
@@ -44,6 +47,14 @@ Compiles the typescript to `dist`.
 ### `yarn dev:legacy`
 
 Runs the legacy parsing script.
+
+### `yarn dev:tags`
+
+Runs the legacy tags parsing script.
+
+### `yarn dev:sql`
+
+Generates SQL statements
 
 ### `yarn dev:upload`
 

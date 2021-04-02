@@ -5,8 +5,12 @@ import { parse } from 'fast-csv';
 import { INDICES } from '../Config';
 import { Tag, tagValue } from '../utility/utility.tag';
 
-export async function TransformFile(input: string, output: string, order: Array<string>) {
-    const writer = createWriteStream(output, { flags: 'w' });
+export async function TransformFile(input: string, output_folder: string, order: Array<string>) {
+    let index = 0;
+    let chunkSize = 250000;
+    let count = 0;
+
+    let writer = createWriteStream(`${output_folder}/transaction.chunk${index}.csv`, { flags: 'w' });
     writer.write(order.concat(INDICES).join(`|`) + `\n`);
 
     const size = statSync(input).size;
@@ -27,6 +31,15 @@ export async function TransformFile(input: string, output: string, order: Array<
         })
         .pipe(parse({ headers: true, delimiter: '|', escape: '\\' }))
         .on('data', row => {
+            count++;
+
+            if (count >= chunkSize) {
+                count = 0;
+                index++;
+                writer = createWriteStream(`${output_folder}/transaction.chunk${index}.csv`, { flags: 'w' });
+                writer.write(order.concat(INDICES).join(`|`) + `\n`);
+            }
+
             const tags = row.tags ? (JSON.parse(row.tags)) : [] as Array<Tag>;
             const coreValues: Array<string> = [];
             const indexValues: Array<string> = [];
@@ -61,7 +74,7 @@ export async function TransformFile(input: string, output: string, order: Array<
         })
         .on('end', () => {
             writer.end();
-            console.log(`Finished writing transactions from ${input} to ${output}`.green.bold);
+            console.log(`Finished writing transactions from ${input} to ${output_folder}`.green.bold);
             process.exit();
         });
 }

@@ -14,6 +14,9 @@ export const LTS_TAGS_URL = process.env.LTS_TAGS_URL;
 export const LEGACY_TRANSACTIONS = process.env.LEGACY_TRANSACTIONS;
 export const OUTPUT_TRANSACTIONS = process.env.OUTPUT_TRANSACTIONS;
 
+export const LEGACY_TAGS = process.env.LEGACY_TAGS;
+export const OUTPUT_TAGS = process.env.OUTPUT_TAGS;
+
 export const ARCHIVE_PATH = process.env.ARCHIVE_PATH;
 export const ARCHIVE_URL = process.env.ARCHIVE_URL;
 

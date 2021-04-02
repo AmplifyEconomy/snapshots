@@ -105,5 +105,7 @@ package-lock.json
 
 dist
 temp
-bin/pull.fmt.sh
 nohup.out
+
+bin/pull.fmt.sh
+bin/copy.sh

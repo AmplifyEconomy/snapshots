@@ -8,6 +8,8 @@
   "scripts": {
     "dev:build": "tsc",
     "dev:legacy": "npm run dev:build && node dist/Legacy.js",
+    "dev:tags": "npm run dev:build && node dist/Tags.js",
+    "dev:sql": "npm run dev:build && node dist/SQL.js",
     "dev:upload": "npm run dev:build && node dist/Upload.js"
   },
   "dependencies": {
