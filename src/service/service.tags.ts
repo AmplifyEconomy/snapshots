@@ -53,11 +53,11 @@ export async function TransformTags(input: string, output_folder: string) {
                     write = false;
                 }
 
-                if (!row[key].match(/[a-zA-Z0-9!@#\$%\^\&*\ )\(+=._-]+$/g)) {
+                if (!row[key].match(/[a-zA-Z0-9!@#\$%\^\&*\ {}[\]"':;)\(+=._-]+$/g)) {
                     write = false;
                 }
 
-                line.push(`"${row[key].replace(/"/g, '').replace(/\n/g, '')}"`);
+                line.push(`"${row[key].replace(/"/g, '\\"').replace(/\n/g, '')}"`);
             }
 
             if (write) {
