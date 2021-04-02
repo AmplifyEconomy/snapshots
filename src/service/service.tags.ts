@@ -45,19 +45,19 @@ export async function TransformTags(input: string, output_folder: string) {
             for (let i = 0; i < TagOrder.length; i++) {
                 const key = TagOrder[i];
 
-                if (key === `tx_id` && row[key].length >= 64) {
+                if (key === `tx_id` && new TextEncoder().encode(row[key]).length >= 64) {
                     write = false;
                 }
 
-                if (!row[key] || row[key].length >= 2048) {
+                if (!row[key] || new TextEncoder().encode(row[key]).length >= 2048) {
                     write = false;
                 }
 
-                if (!row[key].match(/[a-zA-Z0-9!@#\$%\^\&*\ {}[\]"':;)\(+=._-]+$/g)) {
-                    write = false;
+                if (key === `tx_id`) {
+                    line.push(`"${row[key].replace(/\[|]|{|"|'|\(|\)|:|;|\||\/|\\|\<|\>/g, '').replace(/[\n\r]/g, '')}"`);
+                } else {
+                    line.push(`"${row[key].replace(/\[|]|{|"|'|\(|\)|:|;|\||\/|\\|\<|\>/g, '\\$&').replace(/[\n\r]/g, '')}"`);
                 }
-
-                line.push(`"${row[key].replace(/"/g, '\\"').replace(/\n/g, '')}"`);
             }
 
             if (write) {
