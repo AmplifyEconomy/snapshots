@@ -1,5 +1,5 @@
 import { list, write } from 'fs-jetpack';
-import { OUTPUT_TAGS } from './Config';
+import { OUTPUT_TAGS, SQL_PATH } from './Config';
 
 export async function SQL() {
     let sql = `#!/bin/bash
@@ -19,15 +19,15 @@ show statement_timeout;
         const item = items[i];
 
         if (item.indexOf('block') !== -1) {
-            sql += `\\COPY blocks ("id", "previous_block", "mined_at", "height", "txs", "extended") FROM '${OUTPUT_TAGS}/${item}' WITH (FORMAT CSV, HEADER, ESCAPE '\\', DELIMITER '|', FORCE_NULL("height"));\n`;
+            sql += `\\COPY blocks ("id", "previous_block", "mined_at", "height", "txs", "extended") FROM '${SQL_PATH}/${item}' WITH (FORMAT CSV, HEADER, ESCAPE '\\', DELIMITER '|', FORCE_NULL("height"));\n`;
         }
 
         if (item.indexOf('transaction') !== -1) {
-            sql += `\\COPY transactions ("format","id","signature","owner","owner_address","target","reward","last_tx","height","tags","quantity","content_type","data_size","data_root","App-Name","app","domain","namespace") FROM '${OUTPUT_TAGS}/${item}' WITH (FORMAT CSV, HEADER, ESCAPE '\\', DELIMITER '|', FORCE_NULL("format", "height", "data_size"));\n`;
+            sql += `\\COPY transactions ("format","id","signature","owner","owner_address","target","reward","last_tx","height","tags","quantity","content_type","data_size","data_root","App-Name","app","domain","namespace") FROM '${SQL_PATH}/${item}' WITH (FORMAT CSV, HEADER, ESCAPE '\\', DELIMITER '|', FORCE_NULL("format", "height", "data_size"));\n`;
         }
 
         if (item.indexOf('tags') !== -1) {
-            sql += `\\COPY tags ("tx_id", "index", "name", "value") FROM '${OUTPUT_TAGS}/${item}' WITH (FORMAT CSV, HEADER, ESCAPE '\\', DELIMITER '|', FORCE_NULL(index));\n`;
+            sql += `\\COPY tags ("tx_id", "index", "name", "value") FROM '${SQL_PATH}/${item}' WITH (FORMAT CSV, HEADER, ESCAPE '\\', DELIMITER '|', FORCE_NULL(index));\n`;
         }
     }
 

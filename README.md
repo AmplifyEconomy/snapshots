@@ -21,6 +21,8 @@ OUTPUT_TRANSACTIONS=/arweave/parsed
 LEGACY_TAGS=/arweave/legacy/tags.csv
 OUTPUT_TAGS=/arweave/parsed
 
+SQL_PATH=/arweave/snapshot
+
 ARCHIVE_PATH=
 ARCHIVE_URL=
 
