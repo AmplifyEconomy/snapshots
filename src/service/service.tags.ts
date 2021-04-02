@@ -39,8 +39,30 @@ export async function TransformTags(input: string, output_folder: string) {
                 writer.write(TagOrder.join(`|`) + `\n`);
             }
 
-            const line = TagOrder.map(key => row[key]);
-            writer.write(line.join(`|`) + `\n`);
+            let line = [];
+            let write = true;
+
+            for (let i = 0; i < TagOrder.length; i++) {
+                const key = TagOrder[i];
+
+                if (key === `tx_id` && row[key].length >= 64) {
+                    write = false;
+                }
+
+                if (!row[key] || row[key].length >= 2048) {
+                    write = false;
+                }
+
+                if (!row[key].match(/[a-zA-Z0-9!@#\$%\^\&*\ )\(+=._-]+$/g)) {
+                    write = false;
+                }
+
+                line.push(`"${row[key].replace(/"/g, '').replace(/\n/g, '')}"`);
+            }
+
+            if (write) {
+                writer.write(line.join(`|`) + `\n`);
+            }
         })
         .on('error', error => {
             console.error(error);
