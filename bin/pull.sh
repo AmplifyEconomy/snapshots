@@ -10,6 +10,8 @@ export PGUSER=
 export PGPORT=
 export PGDATABASE=
 export PGPASSWORD=
+
+# This is the output folder
 export OUTPUT=
 
 export FORMAT="(DELIMITER '|', FORMAT CSV, HEADER, FORCE_QUOTE *, ESCAPE '\', ENCODING UTF8)"
@@ -18,7 +20,7 @@ export BLOCKLIST='("id", "previous_block", "mined_at", "height", "txs", "extende
 export TXLIST='("format", "id", "signature", "owner", "owner_address", "target", "reward", "last_tx", "height", "tags", "quantity", "content_type", "data_size", "data_root")'
 export TAGLIST='("tx_id", "index", "name", "value")'
 
-echo pulling please wait
+echo COPYing database to CSV please wait
 
 psql -h $PGHOST -U $PGUSER -p $PGPORT -d $PGDATABASE << EOF
 
@@ -31,4 +33,4 @@ show statement_timeout;
 
 EOF
 
-echo fin
+echo Finished COPYing database to CSV
