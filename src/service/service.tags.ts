@@ -3,6 +3,7 @@ import ProgressBar from 'progress';
 import progress from 'progress-stream';
 import { parse } from 'fast-csv';
 import { TagOrder } from '../Order';
+import { toB64url } from '../utility/utility.encoding';
 
 export async function TransformTags(input: string, output_folder: string) {
     let index = 0;
@@ -49,14 +50,10 @@ export async function TransformTags(input: string, output_folder: string) {
                     write = false;
                 }
 
-                if (!row[key] || new TextEncoder().encode(row[key]).length >= 2048) {
-                    write = false;
-                }
-
-                if (key === `tx_id`) {
-                    line.push(`"${row[key].replace(/\[|]|{|"|'|\(|\)|:|;|\||\/|\\|\<|\>/g, '').replace(/[\n\r]/g, '')}"`);
+                if (key === `name` || key === `value`) {
+                    line.push(`"${toB64url(row[key])}"`);
                 } else {
-                    line.push(`"${row[key].replace(/\[|]|{|"|'|\(|\)|:|;|\||\/|\\|\<|\>/g, '\\$&').replace(/[\n\r]/g, '')}"`);
+                    line.push(`"${row[key]}"`);
                 }
             }
 

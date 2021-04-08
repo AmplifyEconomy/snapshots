@@ -3,8 +3,8 @@ export type Base64UrlEncodedString = string;
 export type WinstonString = string;
 export type ArString = string;
 
-export function toB64url(buffer: Buffer): Base64UrlEncodedString {
-  return buffer
+export function toB64url(input: string): Base64UrlEncodedString {
+  return Buffer.from(input)
       .toString('base64')
       .replace(/\+/g, '-')
       .replace(/\//g, '_')
