@@ -2,7 +2,7 @@ import { statSync, createReadStream, createWriteStream } from 'fs';
 import ProgressBar from 'progress';
 import progress from 'progress-stream';
 import { parse } from 'fast-csv';
-import { TagOrder } from '../Order';
+import { TagOrder } from '../Config';
 import { toB64url } from '../utility/utility.encoding';
 
 export async function TransformTags(input: string, output_folder: string) {

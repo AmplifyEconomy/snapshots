@@ -1,5 +1,4 @@
-import { LEGACY_TRANSACTIONS, OUTPUT_TRANSACTIONS } from './Config';
-import { TransactionOrder } from './Order';
+import { LEGACY_TRANSACTIONS, OUTPUT_TRANSACTIONS, TransactionOrder } from './Config';
 import { TransformFile } from './service/service.transform';
 
 export async function Start() {

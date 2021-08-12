@@ -1,20 +1,16 @@
-# Gateway Snapshots
+# Arweave Gateway Snapshots
 
-A way to parse snapshots and archive snapshots with AWS SDK compatible drivers. This tool will eventually migrate to archiving snapshots to Arweave in the future.
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+[![Build Status](https://travis-ci.org/AmplifyEconomy/snapshots.svg?branch=master)](https://travis-ci.org/AmplifyEconomy/snapshots)
+[![codecov](https://codecov.io/gh/AmplifyEconomy/snapshots/branch/master/graph/badge.svg)](https://codecov.io/gh/AmplifyEconomy/snapshots)
+
+A way to parse snapshots and archive snapshots for Arweave and upload them to the Akash Network.
 
 ## Configuration
 
 Update the configuration file with the appropriate urls.
 
 ```config
-LEGACY_BLOCKS_URL=
-LEGACY_TRANSACTIONS_URL=
-LEGACY_TAGS_URL=
-
-LTS_BLOCKS_URL=
-LTS_TRANSACTIONS_URL=
-LTS_TAGS_URL=
-
 LEGACY_TRANSACTIONS=/arweave/legacy/transaction.csv
 OUTPUT_TRANSACTIONS=/arweave/parsed
 
