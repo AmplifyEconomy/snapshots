@@ -6,6 +6,8 @@ config();
 export const LEGACY_TRANSACTIONS = process.env.LEGACY_TRANSACTIONS;
 export const OUTPUT_TRANSACTIONS = process.env.OUTPUT_TRANSACTIONS;
 
+export const TRANSACTIONS = process.env.TRANSACTIONS;
+
 export const LEGACY_TAGS = process.env.LEGACY_TAGS;
 export const OUTPUT_TAGS = process.env.OUTPUT_TAGS;
 
