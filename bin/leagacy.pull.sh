@@ -17,7 +17,7 @@ export OUTPUT=
 export FORMAT="(DELIMITER '|', FORMAT CSV, HEADER, FORCE_QUOTE *, ESCAPE '\', ENCODING UTF8)"
 
 export BLOCKLIST='("id", "previous_block", "mined_at", "height", "txs", "extended")'
-export TXLIST='("format", "id", "signature", "owner", "owner_address", "target", "reward", "last_tx", "height", "tags", "quantity", "content_type", "data_size", "data_root", "parent", "App-Name", "app", "domain", "namespace")'
+export TXLIST='("format", "id", "signature", "owner", "owner_address", "target", "reward", "last_tx", "height", "tags", "quantity", "content_type", "data_size", "data_root")'
 export TAGLIST='("tx_id", "index", "name", "value")'
 
 echo COPYing database to CSV please wait
