@@ -14,6 +14,8 @@ Update the configuration file with the appropriate urls.
 LEGACY_TRANSACTIONS=/arweave/legacy/transaction.csv
 OUTPUT_TRANSACTIONS=/arweave/parsed
 
+TRANSACTIONS=/arweave/transaction.csv
+
 LEGACY_TAGS=/arweave/legacy/tags.csv
 OUTPUT_TAGS=/arweave/parsed
 
@@ -45,6 +47,10 @@ Compiles the typescript to `dist`.
 ### `yarn dev:legacy`
 
 Runs the legacy parsing script.
+
+### `yarn dev:transactions`
+
+Runs the new transactions parsing script.
 
 ### `yarn dev:tags`
 

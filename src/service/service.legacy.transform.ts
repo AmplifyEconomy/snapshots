@@ -3,13 +3,14 @@ import ProgressBar from 'progress';
 import progress from 'progress-stream';
 import { parse } from 'fast-csv';
 import { INDICES } from '../Config';
+import { Tag, tagValue } from '../utility/utility.tag';
 
 export async function TransformFile(input: string, output_folder: string, order: Array<string>) {
     let index = 0;
-    let chunkSize = 500000;
+    let chunkSize = 250000;
     let count = 0;
 
-    let writer = createWriteStream(`${output_folder}/transaction.${index}.csv`, { flags: 'w' });
+    let writer = createWriteStream(`${output_folder}/transaction.chunk${index}.csv`, { flags: 'w' });
     writer.write(order.concat(INDICES).join(`|`) + `\n`);
 
     const size = statSync(input).size;
@@ -35,10 +36,11 @@ export async function TransformFile(input: string, output_folder: string, order:
             if (count >= chunkSize) {
                 count = 0;
                 index++;
-                writer = createWriteStream(`${output_folder}/transaction.${index}.csv`, { flags: 'w' });
+                writer = createWriteStream(`${output_folder}/transaction.chunk${index}.csv`, { flags: 'w' });
                 writer.write(order.concat(INDICES).join(`|`) + `\n`);
             }
 
+            const tags = row.tags ? (JSON.parse(row.tags)) : [] as Array<Tag>;
             const coreValues: Array<string> = [];
             const indexValues: Array<string> = [];
             
@@ -53,14 +55,15 @@ export async function TransformFile(input: string, output_folder: string, order:
                 }
             }
 
-            for (let idx of INDICES) {
-                const value = row[idx];
+            for (let i = 0; i < INDICES.length; i++) {
+                const index = INDICES[i];
+                const value = tagValue(tags, index);
 
                 if (value.length > 1 && value.length < 64) {
                     indexValues.push(`"${value}"`);
                 } else {
                     indexValues.push(`""`);
-                }
+                }                
             }
 
             const indexedLine = coreValues.join(`|`) + `|` + indexValues.join(`|`) + `\n`;
